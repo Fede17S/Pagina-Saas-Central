@@ -93,7 +93,12 @@ footer{text-align:center;padding:32px 24px;color:var(--muted);font-size:13px;bor
 <nav>
   <div class="nav-logo">Distro<span>SaaS</span></div>
   <div class="nav-btns">
-    <a href="rutaapp_admin.html"><button class="btn btn-ghost">Admin</button></a>
+    <a href="https://wa.me/5492804213069" target="_blank" style="text-decoration:none">
+      <button class="btn btn-ghost" style="display:flex;align-items:center;gap:6px">
+        <span style="font-size:16px">💬</span> Contacto
+      </button>
+    </a>
+    <a href="rutaapp_admin.html"><button class="btn btn-primary">Panel admin →</button></a>
   </div>
 </nav>
 
@@ -105,6 +110,9 @@ footer{text-align:center;padding:32px 24px;color:var(--muted);font-size:13px;bor
   <div class="hero-btns">
     <a href="rutaapp_admin.html"><button class="btn btn-primary">Panel admin →</button></a>
     <a href="#acceso"><button class="btn btn-ghost">Acceder como cliente</button></a>
+    <a href="https://wa.me/5492804213069?text=Hola%2C%20quiero%20info%20sobre%20el%20sistema%20para%20distribuidoras" target="_blank" style="text-decoration:none">
+      <button class="btn btn-ghost" style="background:rgba(37,211,102,.1);border-color:#25d366;color:#25d366">💬 Consultar por WhatsApp</button>
+    </a>
   </div>
 </section>
 
@@ -215,8 +223,17 @@ footer{text-align:center;padding:32px 24px;color:var(--muted);font-size:13px;bor
   </div>
 </section>
 
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/5492804213069?text=Hola%2C%20quiero%20info%20sobre%20el%20sistema%20para%20distribuidoras" target="_blank"
+   style="position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none;z-index:999;transition:transform .15s"
+   onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+  💬
+</a>
+
 <footer>
   DistroSaaS &nbsp;·&nbsp; Sistema de gestión para distribuidoras &nbsp;·&nbsp; Hecho en Argentina 🇦🇷
+  &nbsp;·&nbsp;
+  <a href="https://wa.me/5492804213069" target="_blank" style="color:#25d366;text-decoration:none">💬 Contacto</a>
 </footer>
 
 <script>
@@ -227,26 +244,12 @@ function irA(tipo) {
   var err = document.getElementById(errId);
   if (!cod) { err.textContent = "Ingresá el código de tu empresa"; return; }
   err.textContent = "";
-  // Validate against Firebase
-  var FB = "https://distrimar-5e1a3-default-rtdb.firebaseio.com";
-  err.textContent = "🔄 Verificando...";
-  fetch(FB + "/empresas.json")
-    .then(function(r) { return r.json(); })
-    .then(function(empresas) {
-      if (!empresas) { err.textContent = "Error al conectar"; return; }
-      var empKey = Object.keys(empresas).find(function(k) {
-        var e = empresas[k];
-        return (e.codigo || "").toLowerCase() === cod;
-      });
-      if (!empKey) { err.textContent = "❌ Código no encontrado"; return; }
-      var emp = empresas[empKey];
-      if (emp.estado !== "activa") { err.textContent = "⏸ Esta cuenta no está activa"; return; }
-      var dest = tipo === "catalogo"
-        ? "distrimar_catalogo.html?emp=" + cod
-        : "rutaapp_cliente.html?emp=" + cod;
-      location.href = dest;
-    })
-    .catch(function() { err.textContent = "❌ Error de conexión"; });
+  if (cod.length < 2) { err.textContent = "Código muy corto"; return; }
+  // Redirect directly — the app will validate credentials
+  var dest = tipo === "catalogo"
+    ? "distrimar_catalogo.html?emp=" + encodeURIComponent(cod)
+    : "rutaapp_cliente.html?emp=" + encodeURIComponent(cod);
+  location.href = dest;
 }
 
 // Allow Enter key
