@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DistroSaaS — Gestión de distribuidoras</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0d1b2a;--navy2:#111f30;--navy3:#1a2f45;
+  --blue:#3b82f6;--green:#10b981;--gold:#c9933a;
+  --text:#f1f5f9;--muted:#94a3b8;--border:#2a3a52;
+  --radius:12px;
+}
+body{font-family:"Inter",sans-serif;background:var(--navy);color:var(--text);min-height:100vh}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:64px;border-bottom:1px solid var(--border);background:var(--navy2);position:sticky;top:0;z-index:100}
+.nav-logo{font-size:20px;font-weight:900;letter-spacing:-0.5px}
+.nav-logo span{color:var(--gold)}
+.nav-btns{display:flex;gap:10px;align-items:center}
+.btn{padding:9px 20px;border-radius:8px;font-family:"Inter",sans-serif;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:filter .15s}
+.btn:active{filter:brightness(.9)}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--text)}
+.btn-primary{background:var(--gold);color:var(--navy)}
+.btn-blue{background:var(--blue);color:#fff}
+
+/* HERO */
+.hero{text-align:center;padding:80px 24px 60px;max-width:720px;margin:0 auto}
+.hero-badge{display:inline-block;background:rgba(201,147,58,.15);color:var(--gold);border:1px solid rgba(201,147,58,.3);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;letter-spacing:.5px;margin-bottom:20px;text-transform:uppercase}
+.hero h1{font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.1;letter-spacing:-1px;margin-bottom:16px}
+.hero h1 span{color:var(--gold)}
+.hero p{font-size:16px;color:var(--muted);line-height:1.7;max-width:560px;margin:0 auto 32px}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ACCESS CARD */
+.access-section{max-width:900px;margin:0 auto;padding:0 24px 80px}
+.access-title{text-align:center;font-size:24px;font-weight:800;margin-bottom:8px}
+.access-sub{text-align:center;color:var(--muted);font-size:15px;margin-bottom:40px}
+.access-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.access-card{background:var(--navy2);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;text-align:center;transition:border-color .2s,transform .15s}
+.access-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.access-card .icon{font-size:40px;margin-bottom:14px}
+.access-card h3{font-size:17px;font-weight:800;margin-bottom:6px}
+.access-card p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:18px}
+.access-form{display:flex;flex-direction:column;gap:8px}
+.access-input{padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;background:var(--navy3);color:var(--text);font-size:14px;font-family:"Inter",sans-serif;outline:none;text-align:center}
+.access-input:focus{border-color:var(--gold)}
+.access-input::placeholder{color:var(--muted)}
+.access-err{font-size:11px;color:#f87171;min-height:14px;text-align:center}
+
+/* FEATURES */
+.features{background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:64px 24px}
+.features-inner{max-width:900px;margin:0 auto}
+.features-title{text-align:center;font-size:22px;font-weight:800;margin-bottom:36px}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.feat{padding:20px;background:var(--navy);border:1px solid var(--border);border-radius:10px}
+.feat-icon{font-size:28px;margin-bottom:10px}
+.feat h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.feat p{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* PLANS */
+.plans{max-width:900px;margin:0 auto;padding:64px 24px}
+.plans-title{text-align:center;font-size:22px;font-weight:800;margin-bottom:8px}
+.plans-sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:36px}
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.plan{border:1.5px solid var(--border);border-radius:var(--radius);padding:28px 22px;position:relative}
+.plan.featured{border-color:var(--gold);background:rgba(201,147,58,.05)}
+.plan-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-size:10px;font-weight:800;padding:3px 12px;border-radius:10px;white-space:nowrap;text-transform:uppercase;letter-spacing:.5px}
+.plan-name{font-size:16px;font-weight:800;margin-bottom:4px}
+.plan-price{font-size:28px;font-weight:900;color:var(--gold);margin:12px 0}
+.plan-price small{font-size:13px;color:var(--muted);font-weight:400}
+.plan-features{list-style:none;margin:14px 0 20px;display:flex;flex-direction:column;gap:8px}
+.plan-features li{font-size:13px;display:flex;gap:8px;align-items:flex-start;color:var(--muted)}
+.plan-features li span:first-child{flex-shrink:0;margin-top:1px}
+.plan-features li.yes{color:var(--text)}
+
+/* FOOTER */
+footer{text-align:center;padding:32px 24px;color:var(--muted);font-size:13px;border-top:1px solid var(--border)}
+
+/* MOBILE */
+@media(max-width:600px){
+  nav{padding:0 16px}
+  .hero{padding:48px 16px 40px}
+  .access-grid{grid-template-columns:1fr}
+  .nav-logo{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Distro<span>SaaS</span></div>
+  <div class="nav-btns">
+    <a href="rutaapp_admin.html"><button class="btn btn-ghost">Admin</button></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🚀 Sistema de gestión para distribuidoras</div>
+  <h1>Tu distribuidora, <span>digitalizada</span> en minutos</h1>
+  <p>Catálogo digital, app para vendedores, control de pagos y cuentas corrientes — todo en un solo sistema, desde el celular.</p>
+  <div class="hero-btns">
+    <a href="rutaapp_admin.html"><button class="btn btn-primary">Panel admin →</button></a>
+    <a href="#acceso"><button class="btn btn-ghost">Acceder como cliente</button></a>
+  </div>
+</section>
+
+<!-- ACCESS CARDS -->
+<section class="access-section" id="acceso">
+  <div class="access-title">¿Cómo querés acceder?</div>
+  <div class="access-sub">Ingresá el código de tu distribuidora para entrar a la sección correcta</div>
+  <div class="access-grid">
+
+    <div class="access-card">
+      <div class="icon">🛍️</div>
+      <h3>Ver catálogo</h3>
+      <p>Clientes de la distribuidora: explorá productos, precios y hacé tu pedido</p>
+      <div class="access-form">
+        <input class="access-input" type="text" id="cod-catalogo" placeholder="Código de empresa" autocapitalize="none">
+        <div class="access-err" id="err-catalogo"></div>
+        <button class="btn btn-primary" onclick="irA('catalogo')">Abrir catálogo →</button>
+      </div>
+    </div>
+
+    <div class="access-card">
+      <div class="icon">📦</div>
+      <h3>App del vendedor</h3>
+      <p>Vendedores y repartidores: pedidos, remitos, hoja de ruta y cobros</p>
+      <div class="access-form">
+        <input class="access-input" type="text" id="cod-vendedor" placeholder="Código de empresa" autocapitalize="none">
+        <div class="access-err" id="err-vendedor"></div>
+        <button class="btn btn-blue" onclick="irA('vendedor')">Abrir app →</button>
+      </div>
+    </div>
+
+    <div class="access-card">
+      <div class="icon">👑</div>
+      <h3>Panel admin</h3>
+      <p>Administradores: gestión completa de productos, clientes, reportes y pagos</p>
+      <div class="access-form" style="gap:0">
+        <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Acceso con credenciales de administrador del sistema</div>
+        <a href="rutaapp_admin.html" style="text-decoration:none">
+          <button class="btn btn-ghost" style="width:100%">Ir al admin →</button>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="features-inner">
+    <div class="features-title">Todo lo que incluye el sistema</div>
+    <div class="feat-grid">
+      <div class="feat"><div class="feat-icon">🛍️</div><h4>Catálogo digital</h4><p>Tus clientes ven el catálogo actualizado en tiempo real desde el celular. Fotos, precios y búsqueda.</p></div>
+      <div class="feat"><div class="feat-icon">📦</div><h4>App del vendedor</h4><p>Pedidos, remitos, hoja de ruta, cobros con firma digital y sincronización automática.</p></div>
+      <div class="feat"><div class="feat-icon">💰</div><h4>Control de pagos</h4><p>Cuentas corrientes por cliente, registro de cobros con comprobantes foto y saldo en tiempo real.</p></div>
+      <div class="feat"><div class="feat-icon">📊</div><h4>Reportes y comisiones</h4><p>Ventas del mes, top clientes, top productos, comisiones por lista de precios. Exportá en PDF.</p></div>
+      <div class="feat"><div class="feat-icon">🗺️</div><h4>Mapa de entregas</h4><p>Ruta optimizada con GPS, puntos en el mapa y navegación directa a Google Maps o Waze.</p></div>
+      <div class="feat"><div class="feat-icon">🏭</div><h4>Control de proveedores</h4><p>Registrá compras y pagos a tus proveedores. Saldo, historial y cuenta corriente en PDF.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section class="plans">
+  <div class="plans-title">Planes disponibles</div>
+  <div class="plans-sub">Elegí el plan que se adapta a tu distribuidora</div>
+  <div class="plans-grid">
+
+    <div class="plan">
+      <div class="plan-name">🔵 Básico</div>
+      <div class="plan-price">A consultar <small>/mes</small></div>
+      <ul class="plan-features">
+        <li class="yes"><span>✅</span>Catálogo digital para clientes</li>
+        <li class="yes"><span>✅</span>Lista de precios personalizada</li>
+        <li class="yes"><span>✅</span>Pedidos por WhatsApp</li>
+        <li><span>❌</span>App del vendedor</li>
+        <li><span>❌</span>Control de pagos</li>
+        <li><span>❌</span>Reportes y comisiones</li>
+      </ul>
+    </div>
+
+    <div class="plan featured">
+      <div class="plan-badge">⭐ Más popular</div>
+      <div class="plan-name">🟡 Estándar</div>
+      <div class="plan-price">A consultar <small>/mes</small></div>
+      <ul class="plan-features">
+        <li class="yes"><span>✅</span>Todo el plan Básico</li>
+        <li class="yes"><span>✅</span>App para vendedores</li>
+        <li class="yes"><span>✅</span>Hoja de ruta y cobros</li>
+        <li class="yes"><span>✅</span>Firma digital del cliente</li>
+        <li class="yes"><span>✅</span>Mapa de entregas</li>
+        <li><span>❌</span>Control de pagos avanzado</li>
+      </ul>
+    </div>
+
+    <div class="plan">
+      <div class="plan-name">🟢 Pro</div>
+      <div class="plan-price">A consultar <small>/mes</small></div>
+      <ul class="plan-features">
+        <li class="yes"><span>✅</span>Todo el plan Estándar</li>
+        <li class="yes"><span>✅</span>Cuentas corrientes completas</li>
+        <li class="yes"><span>✅</span>Control de proveedores</li>
+        <li class="yes"><span>✅</span>Reportes y PDF</li>
+        <li class="yes"><span>✅</span>Dashboard con analytics</li>
+        <li class="yes"><span>✅</span>Soporte prioritario</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  DistroSaaS &nbsp;·&nbsp; Sistema de gestión para distribuidoras &nbsp;·&nbsp; Hecho en Argentina 🇦🇷
+</footer>
+
+<script>
+function irA(tipo) {
+  var inputId = tipo === 'catalogo' ? 'cod-catalogo' : 'cod-vendedor';
+  var errId   = tipo === 'catalogo' ? 'err-catalogo' : 'err-vendedor';
+  var cod = document.getElementById(inputId).value.trim().toLowerCase();
+  var err = document.getElementById(errId);
+  if (!cod) { err.textContent = "Ingresá el código de tu empresa"; return; }
+  err.textContent = "";
+  // Validate against Firebase
+  var FB = "https://distrimar-5e1a3-default-rtdb.firebaseio.com";
+  err.textContent = "🔄 Verificando...";
+  fetch(FB + "/empresas.json")
+    .then(function(r) { return r.json(); })
+    .then(function(empresas) {
+      if (!empresas) { err.textContent = "Error al conectar"; return; }
+      var empKey = Object.keys(empresas).find(function(k) {
+        var e = empresas[k];
+        return (e.codigo || "").toLowerCase() === cod;
+      });
+      if (!empKey) { err.textContent = "❌ Código no encontrado"; return; }
+      var emp = empresas[empKey];
+      if (emp.estado !== "activa") { err.textContent = "⏸ Esta cuenta no está activa"; return; }
+      var dest = tipo === "catalogo"
+        ? "distrimar_catalogo.html?emp=" + cod
+        : "rutaapp_cliente.html?emp=" + cod;
+      location.href = dest;
+    })
+    .catch(function() { err.textContent = "❌ Error de conexión"; });
+}
+
+// Allow Enter key
+["cod-catalogo","cod-vendedor"].forEach(function(id) {
+  document.getElementById(id).addEventListener("keydown", function(e) {
+    if (e.key === "Enter") irA(id === "cod-catalogo" ? "catalogo" : "vendedor");
+  });
+});
+</script>
+</body>
+</html>
