@@ -98,7 +98,7 @@ footer{text-align:center;padding:32px 24px;color:var(--muted);font-size:13px;bor
         <span style="font-size:16px">💬</span> Contacto
       </button>
     </a>
-    <a href="rutaapp_admin.html"><button class="btn btn-primary">Panel admin →</button></a>
+    <a href="https://pagina-pedidos.vercel.app/"><button class="btn btn-primary">Panel admin →</button></a>
   </div>
 </nav>
 
@@ -108,7 +108,7 @@ footer{text-align:center;padding:32px 24px;color:var(--muted);font-size:13px;bor
   <h1>Tu distribuidora, <span>digitalizada</span> en minutos</h1>
   <p>Catálogo digital, app para vendedores, control de pagos y cuentas corrientes — todo en un solo sistema, desde el celular.</p>
   <div class="hero-btns">
-    <a href="rutaapp_admin.html"><button class="btn btn-primary">Panel admin →</button></a>
+    <a href="https://pagina-pedidos.vercel.app/"><button class="btn btn-primary">Panel admin →</button></a>
     <a href="#acceso"><button class="btn btn-ghost">Acceder como cliente</button></a>
     <a href="https://wa.me/5492804213069?text=Hola%2C%20quiero%20info%20sobre%20el%20sistema%20para%20distribuidoras" target="_blank" style="text-decoration:none">
       <button class="btn btn-ghost" style="background:rgba(37,211,102,.1);border-color:#25d366;color:#25d366">💬 Consultar por WhatsApp</button>
@@ -150,7 +150,7 @@ footer{text-align:center;padding:32px 24px;color:var(--muted);font-size:13px;bor
       <p>Administradores: gestión completa de productos, clientes, reportes y pagos</p>
       <div class="access-form" style="gap:0">
         <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Acceso con credenciales de administrador del sistema</div>
-        <a href="rutaapp_admin.html" style="text-decoration:none">
+        <a href="https://pagina-pedidos.vercel.app/" style="text-decoration:none">
           <button class="btn btn-ghost" style="width:100%">Ir al admin →</button>
         </a>
       </div>
@@ -247,8 +247,8 @@ function irA(tipo) {
   if (cod.length < 2) { err.textContent = "Código muy corto"; return; }
   // Redirect directly — the app will validate credentials
   var dest = tipo === "catalogo"
-    ? "distrimar_catalogo.html?emp=" + encodeURIComponent(cod)
-    : "rutaapp_cliente.html?emp=" + encodeURIComponent(cod);
+    ? "https://pagina-clientes-nu.vercel.app/?emp=" + encodeURIComponent(cod)
+    : "https://pagina-clientes-pedidos.vercel.app/?emp=" + encodeURIComponent(cod);
   location.href = dest;
 }
 
